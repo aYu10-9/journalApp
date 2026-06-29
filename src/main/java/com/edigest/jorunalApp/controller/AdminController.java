@@ -1,6 +1,7 @@
 package com.edigest.jorunalApp.controller;
 
 
+import com.edigest.jorunalApp.api.response.cache.AppCache;
 import com.edigest.jorunalApp.entity.User;
 import com.edigest.jorunalApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class AdminController {
     @Autowired
     private  UserService userService;
 
+    @Autowired
+    private AppCache appCache;
+
     @GetMapping("/all-users")
     public ResponseEntity<?> getAllUsers(){
         List<User> all = userService.getAll();
@@ -31,4 +35,18 @@ public class AdminController {
     public void createUser(@RequestBody User user){
         userService.saveAdmin(user);
     }
+
+
+    /*//if while app is running annd we change
+     apikey value it will be same untill
+     we restart it but i dont want to
+     restart it so we created a
+     controller which refreshes
+     our cache*/
+    @GetMapping("clear-app-cache")
+    public void ClearAppCache(){
+        appCache.init();
+    }
+
+    
 }

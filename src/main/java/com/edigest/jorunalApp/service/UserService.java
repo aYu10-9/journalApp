@@ -5,18 +5,24 @@ import com.edigest.jorunalApp.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 
-@Component
+@Service
 @Slf4j
 public class UserService {
+
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Autowired
     private UserRepository userRepository;
